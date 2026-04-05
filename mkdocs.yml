@@ -1,0 +1,29 @@
+site_name: NDAE Documentation
+site_description: Documentation for the Neural Differential Appearance Equations project
+site_url: https://ee5311-ca1-group25.github.io/ndae_doc/
+repo_url: https://github.com/ee5311-ca1-group25/ndae
+repo_name: ee5311-ca1-group25/ndae
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.expand
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - Training: training.md
+  - Data: data.md
+  - FAQ: faq.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+
+strict: true
