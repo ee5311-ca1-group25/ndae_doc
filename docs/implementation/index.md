@@ -1,14 +1,14 @@
 # Implementation Overview
 
 This section documents the files that implement the current NDAE slice:
-configuration, data loading, and the early rendering helper layers from Lecture 3.
+configuration, data loading, and the core rendering layers from Lecture 3.
 
 The goal of the current implementation is to make three paths concrete:
 
 - parse and validate the config tree, including rendering metadata
 - load exemplar frames and map between discrete frames and continuous ODE time
-- split latent states into BRDF maps and height maps, then convert height maps
-  into world-space normals before later rendering phases
+- split latent states into BRDF maps and height maps, convert height maps into
+  world-space normals, and render svBRDF maps under a flash-lit camera model
 
 These pages are implementation references. They describe code behavior and invariants, not the full theory from the course notes.
 
@@ -23,6 +23,9 @@ This slice connects the following modules:
 - `src/ndae/rendering/__init__.py`
 - `src/ndae/rendering/maps.py`
 - `src/ndae/rendering/normal.py`
+- `src/ndae/rendering/geometry.py`
+- `src/ndae/rendering/brdf.py`
+- `src/ndae/rendering/renderer.py`
 - `src/ndae/data/exemplar.py`
 - `src/ndae/data/timeline.py`
 - `src/ndae/data/sampling.py`
@@ -38,8 +41,9 @@ The flow is:
 5. Use sampling helpers for local crops, shuffled pixel samples, and online-training frame selection.
 6. Use `split_latent_maps` and `clip_maps` to prepare latent states for rendering.
 7. Use `height_to_normal` to convert height channels into `(..., 3, H, W)` normal maps.
-8. Re-export data and rendering helpers through their package entrypoints where applicable.
-9. Lock the behavior down with focused config, dataset, package, smoke, and renderer-helper tests.
+8. Use `render_svbrdf` and the Cook-Torrance helpers to evaluate the projected appearance.
+9. Re-export data and rendering helpers through their package entrypoints where applicable.
+10. Lock the behavior down with focused config, dataset, package, smoke, and renderer tests.
 
 ## Reading guide
 
@@ -47,5 +51,6 @@ The flow is:
 - Read [Config Validation](config/validation.md) and [Base Config](config/base-config.md) to see how the mini dataset defaults and rendering metadata are checked.
 - Read [Rendering Maps](rendering/maps.md) for the latent split/value-mapping layer introduced in Lecture 3.
 - Read [Rendering Normal](rendering/normal.md) for the height-to-normal conversion layer.
+- Read [Rendering Renderer](rendering/renderer.md) for how the renderer is split across geometry helpers, BRDF terms, and the render entrypoint.
 - Read [Data Exemplar](data/exemplar.md), [Data Timeline](data/timeline.md), and [Data Sampling](data/sampling.md) for the runtime data path.
 - Finish with [Renderer Tests](tests/test-renderer.md) and [Dataset Tests](tests/test-dataset.md) for the executable specifications.

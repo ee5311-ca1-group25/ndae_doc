@@ -26,6 +26,7 @@ nav:
       - Rendering:
           - Maps: implementation/rendering/maps.md
           - Normal: implementation/rendering/normal.md
+          - Renderer: implementation/rendering/renderer.md
       - Data:
           - Exemplar: implementation/data/exemplar.md
           - Timeline: implementation/data/timeline.md
