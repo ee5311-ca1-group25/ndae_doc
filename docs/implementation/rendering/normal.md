@@ -15,8 +15,8 @@ The public helper is:
 
 - `height_to_normal(height, scale=1.0) -> torch.Tensor`
 
-At the current phase it is imported from `ndae.rendering.normal`, not yet from
-the top-level `ndae.rendering` package.
+This helper is available from both `ndae.rendering.normal` and the top-level
+`ndae.rendering` package.
 
 ## Behavior and invariants
 
@@ -67,5 +67,6 @@ in configuration validation.
 ## Related files
 
 - `src/ndae/rendering/maps.py`
+- `src/ndae/rendering/__init__.py`
 - `tests/test_renderer.py`
 - `course/lecture03.md`

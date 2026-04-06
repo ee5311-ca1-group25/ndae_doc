@@ -3,7 +3,7 @@
 ## Purpose
 
 `tests/test_renderer.py` is currently the executable specification for the
-Lecture 3 Phase B/C/D rendering stack.
+final Lecture 3 rendering stack.
 
 At this stage the file covers latent map extraction helpers,
 `height_to_normal`, and the first core renderer behaviors across
@@ -26,9 +26,8 @@ The test file exercises:
 - `tonemapping`
 
 It imports these through `ndae.rendering` so the tests also validate the package
-re-export surface where applicable, while `height_to_normal` is imported through
-`ndae.rendering.normal` and renderer runtime helpers are imported through
-`ndae.rendering.renderer`.
+re-export surface directly. The submodule import tests live in
+`tests/test_package_layout.py` and remain as compatibility smoke checks.
 
 ## Behavior and invariants
 
@@ -62,7 +61,7 @@ truncating or reshaping data.
 
 ## Tests / validation
 
-The focused validation command for the current Phase D slice is:
+The focused validation command for the current Phase E/F slice is:
 
 ```bash
 uv run pytest tests/test_renderer.py tests/test_package_layout.py tests/test_config.py -q

@@ -43,7 +43,7 @@ The flow is:
 6. Use `split_latent_maps` and `clip_maps` to prepare latent states for rendering.
 7. Use `height_to_normal` to convert height channels into `(..., 3, H, W)` normal maps.
 8. Use `render_svbrdf` and the Cook-Torrance helpers to evaluate the projected appearance.
-9. Re-export data and rendering helpers through their package entrypoints where applicable.
+9. Re-export data helpers and the full Lecture 3 rendering API through their package entrypoints.
 10. Lock the behavior down with focused config, dataset, package, smoke, and renderer tests.
 
 ## Reading guide

@@ -48,8 +48,8 @@ The current renderer entry module exposes:
 - `light_decay(distance)`
 - `reinhard(img)`
 
-At the current phase these are still imported from `ndae.rendering.renderer`,
-not yet from the top-level `ndae.rendering` package.
+These symbols remain available from `ndae.rendering.renderer` and are now also
+re-exported through the top-level `ndae.rendering` package.
 
 ## Behavior and invariants
 
@@ -108,5 +108,6 @@ their runtime branches are not wired up in this phase.
 - `src/ndae/rendering/brdf.py`
 - `src/ndae/rendering/postprocess.py`
 - `src/ndae/rendering/renderer.py`
+- `src/ndae/rendering/__init__.py`
 - `tests/test_renderer.py`
 - `course/lecture03.md`

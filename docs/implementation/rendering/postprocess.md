@@ -16,8 +16,8 @@ The module exposes:
 - `light_decay(distance)`
 - `reinhard(img)`
 
-At the current phase these helpers are also re-exported through
-`ndae.rendering.renderer` for compatibility.
+These helpers are available from `ndae.rendering.postprocess`, the compatibility
+layer `ndae.rendering.renderer`, and the top-level `ndae.rendering` package.
 
 ## Behavior and invariants
 
@@ -31,5 +31,6 @@ The main renderer currently uses `light_decay` directly inside
 ## Related files
 
 - `src/ndae/rendering/geometry.py`
+- `src/ndae/rendering/__init__.py`
 - `src/ndae/rendering/renderer.py`
 - `tests/test_renderer.py`
