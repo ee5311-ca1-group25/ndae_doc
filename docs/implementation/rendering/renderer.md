@@ -6,6 +6,7 @@ The core differentiable svBRDF renderer used by Lecture 3 is now split across:
 
 - `src/ndae/rendering/geometry.py`
 - `src/ndae/rendering/brdf.py`
+- `src/ndae/rendering/postprocess.py`
 - `src/ndae/rendering/renderer.py`
 
 This keeps the public runtime entrypoint under `renderer.py`, while moving the
@@ -15,9 +16,9 @@ geometric setup and BRDF terms into smaller responsibility-focused modules.
   meshgrid generation, direction computation, and tangent-space projection.
 - `brdf.py` contains Lambertian / GGX / Smith / Fresnel / Cook-Torrance terms
   plus BRDF-map unpack helpers.
-- `renderer.py` keeps `render_svbrdf`, batching checks, crop handling, light
-  falloff, and tone mapping helpers, and re-exports the lower-level symbols for
-  compatibility.
+- `postprocess.py` contains `light_decay`, `tonemapping`, and `reinhard`.
+- `renderer.py` keeps `render_svbrdf`, batching checks, crop handling, and
+  compatibility re-exports for the lower-level symbols.
 
 ## Public API / key types
 
@@ -105,6 +106,7 @@ their runtime branches are not wired up in this phase.
 - `src/ndae/rendering/normal.py`
 - `src/ndae/rendering/geometry.py`
 - `src/ndae/rendering/brdf.py`
+- `src/ndae/rendering/postprocess.py`
 - `src/ndae/rendering/renderer.py`
 - `tests/test_renderer.py`
 - `course/lecture03.md`

@@ -7,8 +7,8 @@ Lecture 3 Phase B/C/D rendering stack.
 
 At this stage the file covers latent map extraction helpers,
 `height_to_normal`, and the first core renderer behaviors across
-`geometry.py`, `brdf.py`, and `renderer.py`. It does not yet cover the entire
-final acceptance surface listed in the lecture plan.
+`geometry.py`, `brdf.py`, `postprocess.py`, and `renderer.py`. It does not yet
+cover the entire final acceptance surface listed in the lecture plan.
 
 ## Public API / key types
 
@@ -82,6 +82,7 @@ This proves:
 - `src/ndae/rendering/normal.py`
 - `src/ndae/rendering/geometry.py`
 - `src/ndae/rendering/brdf.py`
+- `src/ndae/rendering/postprocess.py`
 - `src/ndae/rendering/renderer.py`
 - `src/ndae/rendering/__init__.py`
 - `tests/test_package_layout.py`

@@ -25,6 +25,7 @@ This slice connects the following modules:
 - `src/ndae/rendering/normal.py`
 - `src/ndae/rendering/geometry.py`
 - `src/ndae/rendering/brdf.py`
+- `src/ndae/rendering/postprocess.py`
 - `src/ndae/rendering/renderer.py`
 - `src/ndae/data/exemplar.py`
 - `src/ndae/data/timeline.py`
@@ -51,6 +52,7 @@ The flow is:
 - Read [Config Validation](config/validation.md) and [Base Config](config/base-config.md) to see how the mini dataset defaults and rendering metadata are checked.
 - Read [Rendering Maps](rendering/maps.md) for the latent split/value-mapping layer introduced in Lecture 3.
 - Read [Rendering Normal](rendering/normal.md) for the height-to-normal conversion layer.
-- Read [Rendering Renderer](rendering/renderer.md) for how the renderer is split across geometry helpers, BRDF terms, and the render entrypoint.
+- Read [Rendering Postprocess](rendering/postprocess.md) for light falloff and tone-mapping helpers.
+- Read [Rendering Renderer](rendering/renderer.md) for how the renderer is split across geometry helpers, BRDF terms, post-processing helpers, and the render entrypoint.
 - Read [Data Exemplar](data/exemplar.md), [Data Timeline](data/timeline.md), and [Data Sampling](data/sampling.md) for the runtime data path.
 - Finish with [Renderer Tests](tests/test-renderer.md) and [Dataset Tests](tests/test-dataset.md) for the executable specifications.
