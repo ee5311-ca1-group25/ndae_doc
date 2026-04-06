@@ -9,6 +9,7 @@ This site provides practical guidance for setting up the environment, preparing 
 - Environment setup and project bootstrapping
 - Dataset preparation using the mini SVBRDF subset
 - Dry-run and training entry points
+- Implementation references for config, data, and rendering helpers
 - Common troubleshooting notes
 
 ## Project repositories

@@ -23,11 +23,15 @@ nav:
           - Parsing: implementation/config/parsing.md
           - Validation: implementation/config/validation.md
           - Base Config: implementation/config/base-config.md
+      - Rendering:
+          - Maps: implementation/rendering/maps.md
+          - Normal: implementation/rendering/normal.md
       - Data:
           - Exemplar: implementation/data/exemplar.md
           - Timeline: implementation/data/timeline.md
           - Sampling: implementation/data/sampling.md
       - Tests:
+          - Renderer Tests: implementation/tests/test-renderer.md
           - Dataset Tests: implementation/tests/test-dataset.md
   - FAQ: faq.md
 
