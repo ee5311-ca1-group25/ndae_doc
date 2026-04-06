@@ -21,6 +21,7 @@ This implementation slice connects the following modules:
 - `src/ndae/config/_parsing.py`
 - `src/ndae/config/validation.py`
 - `configs/base.yaml`
+- `src/ndae/data/__init__.py`
 - `src/ndae/data/exemplar.py`
 - `src/ndae/data/timeline.py`
 - `src/ndae/data/sampling.py`
@@ -33,7 +34,8 @@ The flow is:
 3. Load exemplar images into a `[N, 3, H, W]` tensor.
 4. Build a `Timeline` object for frame/time conversion.
 5. Use sampling helpers for local crops, shuffled pixel samples, and online-training frame selection.
-6. Lock the behavior down with dataset and utility tests.
+6. Re-export the data layer through `ndae.data` as the package entrypoint.
+7. Lock the behavior down with dataset and utility tests.
 
 ## Reading guide
 

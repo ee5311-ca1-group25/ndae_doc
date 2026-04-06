@@ -6,6 +6,12 @@
 
 It does more than check shapes. The file encodes the behavior that the data pipeline must preserve as later phases extend the project.
 
+Package-export, config, and CLI smoke regression are intentionally kept in separate files:
+
+- `tests/test_package_layout.py`
+- `tests/test_config.py`
+- `tests/test_smoke.py`
+
 ## Public API / key types
 
 The test file exercises:
@@ -68,12 +74,13 @@ This matters because later code can rely on these boundaries instead of silently
 The recommended command is:
 
 ```bash
-PYTHONPATH=src pytest tests/test_dataset.py tests/test_config.py tests/test_smoke.py
+PYTHONPATH=src pytest tests/test_package_layout.py tests/test_dataset.py tests/test_config.py tests/test_smoke.py
 ```
 
 This combines:
 
 - the dataset and utility checks
+- package export regression
 - config regression coverage
 - the dry-run smoke test
 
