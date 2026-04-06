@@ -4,7 +4,8 @@
 
 `src/ndae/config/_parsing.py` converts raw YAML mappings into the dataclass tree defined in `src/ndae/config/schema.py`.
 
-The current data-path implementation adds timeline-aware parsing for the `data` section and upgrades key validation so optional fields can be accepted without weakening unknown-key checks.
+The current Lecture 3 implementation adds parsing for an optional top-level
+`rendering` section while keeping strict unknown-key rejection.
 
 ## Public API / key types
 
@@ -12,11 +13,17 @@ Key entry points:
 
 - `config_from_mapping(payload) -> NDAEConfig`
 - `build_data_config(payload) -> DataConfig`
+- `build_rendering_config(payload) -> RenderingConfig`
 - `expect_keys(payload, section, required, optional=None) -> None`
 
 ## Behavior and invariants
 
-`build_data_config` now treats the following keys as required:
+Top-level `config` keys now behave as follows:
+
+- required: `experiment`, `data`, `model`, `train`
+- optional: `rendering`
+
+`build_data_config` treats the following keys as required:
 
 - `root`
 - `exemplar`
@@ -36,6 +43,24 @@ If a timeline field is omitted, parsing supplies the default:
 - `t_S = 0.0`
 - `t_E = 10.0`
 
+`build_rendering_config` accepts only optional keys:
+
+- `renderer_type`
+- `n_normal_channels`
+- `n_aug_channels`
+- `camera_fov`
+- `camera_distance`
+- `light_intensity`
+- `light_xy_position`
+- `height_scale`
+- `gamma`
+
+If the entire `rendering` block is omitted, parsing supplies a default
+`RenderingConfig`.
+
+`n_brdf_channels` is never read from YAML. It is derived from
+`renderer_type` through `ndae.rendering.select_renderer(...)`.
+
 `expect_keys` enforces two separate sets:
 
 - `required`, which must all be present
@@ -50,6 +75,8 @@ Parsing raises `ConfigError` when:
 - a required key is missing
 - an unknown key is present
 - a field has the wrong scalar type
+- `renderer_type` is unsupported
+- `light_xy_position` is not a two-element numeric sequence
 - a section expected to be a mapping is not a mapping
 
 Type readers are intentionally strict:
@@ -65,9 +92,13 @@ Type readers are intentionally strict:
 - the base config loads into dataclasses
 - unknown keys are rejected
 - timeline defaults are supplied when omitted
+- the rendering block defaults correctly when omitted
+- legacy `model.n_aug_channels` is rejected
+- invalid renderer metadata is rejected
 
 ## Related files
 
 - `src/ndae/config/schema.py`
 - `src/ndae/config/loader.py`
 - `src/ndae/config/validation.py`
+- `src/ndae/rendering/__init__.py`

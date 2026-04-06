@@ -2,33 +2,50 @@
 
 ## Purpose
 
-`src/ndae/config/schema.py` defines the dataclass tree used across the project.  
-The current data-path implementation extends `DataConfig` so the data layer can carry timeline parameters in addition to dataset paths and image sizes.
+`src/ndae/config/schema.py` defines the dataclass tree used across the project.
+The current Lecture 3 configuration layout separates model architecture settings
+from rendering settings so svBRDF projection parameters have an explicit home.
 
 ## Public API / key types
 
-The relevant type is `DataConfig`:
+The relevant types are `ModelConfig`, `RenderingConfig`, and `NDAEConfig`:
 
 ```python
 @dataclass(slots=True)
-class DataConfig:
-    root: str
-    exemplar: str
-    image_size: int
-    crop_size: int
-    n_frames: int
-    t_I: float = -2.0
-    t_S: float = 0.0
-    t_E: float = 10.0
+class ModelConfig:
+    dim: int
+    solver: str
 ```
 
-`NDAEConfig` embeds this under `config.data`.
+```python
+@dataclass(slots=True)
+class RenderingConfig:
+    renderer_type: str = "diffuse_cook_torrance"
+    n_brdf_channels: int = 8
+    n_normal_channels: int = 1
+    n_aug_channels: int = 9
+    camera_fov: float = 50.0
+    camera_distance: float = 1.0
+    light_intensity: float = 0.0
+    light_xy_position: tuple[float, float] = (0.0, 0.0)
+    height_scale: float = 1.0
+    gamma: float = 2.2
+
+    @property
+    def total_channels(self) -> int: ...
+```
+
+`NDAEConfig` now embeds both `config.model` and `config.rendering`.
 
 ## Behavior and invariants
 
-- `t_I`, `t_S`, and `t_E` are part of the dataclass shape, not ad hoc YAML fields.
-- Default values are stored directly on the dataclass, which keeps older config payloads compatible.
-- The schema itself does not enforce semantic ordering such as `t_I < t_S < t_E`; that belongs in validation.
+- `ModelConfig` no longer carries `n_aug_channels`; augmentation channels are
+  part of the rendering projection shape.
+- `RenderingConfig` stores all renderer metadata and camera/light defaults in
+  one place.
+- `total_channels` is derived state, not a serialized YAML field.
+- The schema itself does not enforce semantic rules such as renderer validity
+  or positive camera distance; that belongs in validation.
 
 ## Error handling
 
@@ -38,11 +55,14 @@ This file does not raise schema-specific errors on its own. It only defines type
 
 Behavior is exercised indirectly through:
 
-- `tests/test_config.py`, which checks config loading and default timeline values
-- `tests/test_dataset.py`, which uses `DataConfig` to construct `ExemplarDataset`
+- `tests/test_config.py`, which checks dataclass loading, rendering defaults,
+  and serialization
+- `tests/test_smoke.py`, which checks dry-run output and resolved config
+- `tests/test_package_layout.py`, which checks the rendering metadata exports
 
 ## Related files
 
 - `src/ndae/config/_parsing.py`
 - `src/ndae/config/validation.py`
+- `src/ndae/rendering/__init__.py`
 - `configs/base.yaml`
