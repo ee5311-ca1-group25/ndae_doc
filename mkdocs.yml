@@ -16,6 +16,19 @@ nav:
   - Getting Started: getting-started.md
   - Training: training.md
   - Data: data.md
+  - Implementation:
+      - Overview: implementation/index.md
+      - Config:
+          - Schema: implementation/config/schema.md
+          - Parsing: implementation/config/parsing.md
+          - Validation: implementation/config/validation.md
+          - Base Config: implementation/config/base-config.md
+      - Data:
+          - Exemplar: implementation/data/exemplar.md
+          - Timeline: implementation/data/timeline.md
+          - Sampling: implementation/data/sampling.md
+      - Tests:
+          - Dataset Tests: implementation/tests/test-dataset.md
   - FAQ: faq.md
 
 markdown_extensions:

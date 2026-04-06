@@ -13,5 +13,4 @@ This site provides practical guidance for setting up the environment, preparing 
 
 ## Project repositories
 
-- Main project workspace: pydae
 - NDAE code repository: https://github.com/ee5311-ca1-group25/ndae
