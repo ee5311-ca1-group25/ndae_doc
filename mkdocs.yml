@@ -11,13 +11,6 @@ theme:
     - navigation.expand
     - content.code.copy
 
-nav:
-  - Home: index.md
-  - Getting Started: getting-started.md
-  - Training: training.md
-  - Data: data.md
-  - FAQ: faq.md
-
 markdown_extensions:
   - admonition
   - tables

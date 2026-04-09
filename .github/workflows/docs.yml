@@ -5,8 +5,10 @@ on:
     branches: [main]
     paths:
       - "docs/**"
+      - "scripts/**"
       - "mkdocs.yml"
       - "requirements.txt"
+      - "pyproject.toml"
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
@@ -26,6 +28,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Checkout NDAE
+        uses: actions/checkout@v4
+        with:
+          repository: ee5311-ca1-group25/ndae
+          path: external/ndae
+
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
@@ -38,6 +46,9 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Validate docs coverage
+        run: python3 scripts/validate_repo_docs.py --repo-root external/ndae --docs-root docs --fail-on-extra
 
       - name: Build site
         run: mkdocs build --strict
