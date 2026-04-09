@@ -1,17 +1,21 @@
-# NDAE Documentation
+# Home
 
-Welcome to the documentation hub for Neural Differential Appearance Equations (NDAE).
+This site is a repository-mirrored reference for the `ndae` implementation. Every tracked implementation file under `main.py`, `scripts/`, `src/`, and `tests/` has a matching page, and the navigation order follows the source tree instead of a tutorial sequence.
 
-This site provides practical guidance for setting up the environment, preparing data, and running training workflows.
+## Coverage
 
-## What is included
+- Documented implementation files: `70`
+- Mirrored roots: `main.py`, `scripts/`, `src/`, `tests/`
+- Generated pages use fixed templates so source files, CLI modules, package entrypoints, and tests stay consistent.
 
-- Environment setup and project bootstrapping
-- Dataset preparation using the mini SVBRDF subset
-- Dry-run and training entry points
-- Implementation references for config, data, and rendering helpers
-- Common troubleshooting notes
+## Navigation
 
-## Project repositories
+- Top-level navigation keeps the repository order: `Home`, `main.py`, `scripts/`, `src/`, `tests/`.
+- Every mirrored directory has its own `index.md`, so sections remain clickable without a custom MkDocs navigation plugin.
+- Leaf pages use the literal source filename as the page title, including `__init__.py`.
 
-- NDAE code repository: https://github.com/ee5311-ca1-group25/ndae
+## Maintenance
+
+- Regenerate the mirrored docs with `python3 scripts/generate_repo_docs.py --repo-root ../ndae --docs-root docs`.
+- Validate coverage, section headings, source-path headers, and banned wording with `python3 scripts/validate_repo_docs.py --repo-root ../ndae --docs-root docs --fail-on-extra`.
+- Build locally with `mkdocs build --strict`.
